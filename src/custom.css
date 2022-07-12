@@ -1,0 +1,47 @@
+.main-sidebar{
+    background-color: #061e3b;
+}
+
+.main-header {
+    background-color: #00295d;
+  }
+
+span{
+      font-family: 'Montserrat-SemiBold', 'Montserrat SemiBold', 'Montserrat', sans-serif;
+    color:white;
+    font-weight: 650;
+    font-size:16px;
+}
+.d-block{
+    color:white;
+}
+
+.nav-pills .nav-link{
+    color:white;
+}
+  .badge-warning{
+    background-color: yellow;
+}
+.logoRk {
+    width: 78px;
+    height: 46px;
+    box-sizing: border-box;
+}
+
+
+aside{
+    color:white;
+}
+i{
+    color:white;
+}
+input{
+    border:1px 1px 1px solid none;
+}
+tr{
+    cursor:pointer;
+
+}
+.input-group-append{
+    cursor: pointer;
+}
