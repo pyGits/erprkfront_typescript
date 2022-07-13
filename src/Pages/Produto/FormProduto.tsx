@@ -36,7 +36,10 @@ const FormProduct = () => {
 
   return (
     <Container title="Cadastro de produto">
-      <Card title="Novo Produto" header={<CardHeader title="Novo produto" />}>
+      <Card
+        title="Novo Produto"
+        header={<CardHeader title={produto.nome || "Novo Produto"} />}
+      >
         {/* ========== Nav tabs =========== */}
         <Navtabs cols={"col-12"} headers={navHeader}>
           <Navcontent id="Principal" active={"show active"}>
