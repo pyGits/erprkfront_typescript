@@ -32,7 +32,7 @@ export default function useProdutos() {
   // obter produto
   async function obter(codigo: string) {
     dispatch({ type: SHOW_LOADING });
-    repo.obter(codigo).then((p) => {
+    await repo.obter(codigo).then((p) => {
       setProduto(p);
 
       dispatch({ type: HIDE_LOADING });

@@ -10,6 +10,7 @@ import { Link, useParams } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import useProdutos from "../../hooks/useProdutos";
 import FiscalTab from "./Tabs/FiscalTab";
+import Teste from "../../Core/teste";
 
 const navHeader = [
   { nome: "Principal", active: "nav-link active", tab: "#Principal" },

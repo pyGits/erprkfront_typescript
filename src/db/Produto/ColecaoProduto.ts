@@ -24,7 +24,7 @@ export default class ColecaoProduto implements ProdutoRepositorio {
     return produto;
   }
   async inserir(produto: Produto): Promise<Produto> {
-    const req = await http.post("/produtos", Produto.ConversorToObj(produto));
+    await http.post("/produtos", Produto.ConversorToObj(produto));
 
     return produto;
   }

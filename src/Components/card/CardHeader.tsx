@@ -8,7 +8,7 @@ interface CardHeaderProps {
 const CardHeader = (props: CardHeaderProps) => {
   return (
     <div className="card-header">
-      <h3 className="card-title">{props.title}</h3>
+      <h5 className="box-title bold">{props.title}</h5>
       {props.children}
     </div>
   );

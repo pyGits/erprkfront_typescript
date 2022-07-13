@@ -16,7 +16,7 @@ export default function useTributacaos() {
   // obter todos os produtos
   async function obterTodos() {
     dispatch({ type: "SHOW_LOADING" });
-    repo.obterTodos().then((p) => {
+    await repo.obterTodos().then((p) => {
       setTributacoes(p);
       dispatch({ type: "HIDE_LOADING" });
     });

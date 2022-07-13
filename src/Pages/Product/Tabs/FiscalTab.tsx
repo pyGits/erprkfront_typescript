@@ -9,41 +9,43 @@ interface FiscalTabProps {
 }
 
 const FiscalTab = (props: FiscalTabProps) => {
-  const { tributacao, obter, setTributacao } = useTributacoes();
-  const HandleMudarTributacao = async (tributacao: Tributacao) => {
-    // ao sair altera diretamente no produto e recarrega
-    await obter(tributacao.codigo);
-    props.produto.tributacao = tributacao.codigo;
-    props.setProduto(Produto.Conversor(props.produto));
-  };
+  const [load, setLoad] = useState<boolean>();
+  const { tributacao, setTributacao, obter } = useTributacoes();
   useEffect(() => {
-    //quando mudar tributação dentro do produto, muda na classe
+    // primeiro carregamento pagina, carregar informações no estado local
     tributacao.codigo = props.produto.tributacao;
     setTributacao(Tributacao.Conversor(tributacao));
-    HandleMudarTributacao(tributacao);
+    obter(tributacao.codigo);
   }, [props.produto.tributacao]);
-
   return (
     <div className="card-body">
       <div className="col-12">
         <div className="row" style={{ marginTop: "10px" }}>
-          <div className="col-4">
+          <div className="col-6">
             <label>Tributação</label>
             <div className="input-group mb-3">
               <input
                 type="text"
                 className="form-control col-3"
                 value={tributacao.codigo}
-                onBlur={() => HandleMudarTributacao(tributacao)}
                 onChange={(e) => {
                   tributacao.codigo = e.target.value;
                   setTributacao(Tributacao.Conversor(tributacao));
+                }}
+                onBlur={() => {
+                  obter(tributacao.codigo).then(() => {
+                    props.produto.tributacao = tributacao.codigo;
+                    props.setProduto(Produto.Conversor(props.produto));
+                  });
                 }}
               />
               <div
                 className="input-group-append"
                 data-toggle="modal"
                 data-target="#taxationSearch"
+                onClick={() => {
+                  setLoad(!load);
+                }}
               >
                 <span className="input-group-text">
                   <i className="fas fa-search"></i>
@@ -58,46 +60,51 @@ const FiscalTab = (props: FiscalTabProps) => {
             </div>
           </div>
 
-          <div className="col-3">
-            <label>NCM</label>
-            <div className="input-group mb-3">
-              <input
-                type="text"
-                className="form-control col-3"
-                value={props.produto.ncm}
-                readOnly
-              />
-              <div className="input-group-append">
-                <span className="input-group-text">
-                  <i className="fas fa-search"></i>
-                </span>
+          <div className="col-12">
+            <div className="row">
+              <div className="col-6">
+                <label>NCM</label>
+                <div className="input-group mb-3">
+                  <input
+                    type="text"
+                    className="form-control col-6"
+                    value={props.produto.ncm}
+                    readOnly
+                  />
+                  <div className="input-group-append">
+                    <span className="input-group-text">
+                      <i className="fas fa-search"></i>
+                    </span>
+                  </div>
+                  <input
+                    type="text"
+                    className="form-control col-6"
+                    value={"teste"}
+                    readOnly
+                  />
+                </div>
               </div>
-              <input
-                type="text"
-                className="form-control col-3"
-                value={"teste"}
-                readOnly
-              />
-            </div>
-          </div>
-          <div className="col-3">
-            <label>CEST</label>
-            <div className="input-group mb-3">
-              <input
-                type="text"
-                className="form-control"
-                value={props.produto.cest}
-                readOnly
-              />
-              <div className="input-group-append">
-                <span className="input-group-text">
-                  <i className="fas fa-search"></i>
-                </span>
+              <div className="col-6">
+                <label>CEST</label>
+                <div className="input-group mb-3">
+                  <input
+                    type="text"
+                    className="form-control"
+                    value={props.produto.cest}
+                    readOnly
+                  />
+                  <div className="input-group-append">
+                    <span className="input-group-text">
+                      <i className="fas fa-search"></i>
+                    </span>
+                  </div>
+                </div>
+                <code>Salgadinhos estranhos</code>
               </div>
             </div>
-            <code>Salgadinhos estranhos</code>
           </div>
         </div>
+
         <div className="card-header">
           <h3
             className="card-title"
@@ -128,7 +135,9 @@ const FiscalTab = (props: FiscalTabProps) => {
       <SearchTaxation
         tributacao={tributacao}
         setTributacao={setTributacao}
-        setProduto={HandleMudarTributacao}
+        setProduto={props.setProduto}
+        produto={props.produto}
+        load={load}
       ></SearchTaxation>
     </div>
   );

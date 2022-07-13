@@ -1,31 +1,37 @@
 import React, { useEffect } from "react";
 import Modal from "../../../Components/modal/Modal";
 import Table from "../../../Components/table/Table";
+import Produto from "../../../Core/Produto/Produto";
 import Tributacao from "../../../Core/Tributacao/Tributacao";
 import useTributacoes from "../../../hooks/useTributacoes";
 
 interface SearchTaxationProps {
   tributacao: Tributacao;
   setTributacao: any;
-  setProduto?: any;
+  setProduto: any;
+  produto: Produto;
+  load: any; // propriedade para carregar tributações
 }
 
 const SearchTaxation = (props: SearchTaxationProps) => {
-  const { tributacoes, tributacao, tributacaoSelecionado, obterTodos } =
+  const { tributacao, tributacoes, tributacaoSelecionado, obterTodos } =
     useTributacoes();
+
   const column = [
     { heading: "Código", value: "codigo" },
     { heading: "Descrição", value: "tributacao" },
   ];
-  // on show modal
-  $("#taxationSearch").on("show.bs.modal", function () {
-    obterTodos();
-  });
+
   useEffect(() => {
+    // alterar na classe da props
     props.setTributacao(tributacao);
-    props.setProduto?.(tributacao);
+    props.produto.tributacao = tributacao.codigo;
+    props.setProduto?.(props.produto);
   }, [tributacao]);
 
+  useEffect(() => {
+    obterTodos();
+  }, [props.load]);
   return (
     <Modal title={"Localizar Tributacao"} id={`taxationSearch`}>
       <div>
