@@ -14,14 +14,14 @@ export default function useTributacaos() {
     setTributacao(tributacao);
   };
   // obter todos os produtos
-  async function obterTodos() {
+  async function obterTributacaoTodos() {
     dispatch({ type: "SHOW_LOADING" });
     await repo.obterTodos().then((p) => {
       setTributacoes(p);
       dispatch({ type: "HIDE_LOADING" });
     });
   }
-  async function obter(codigo: string) {
+  async function obterTributacao(codigo: string) {
     dispatch({ type: "SHOW_LOADING" });
     repo
       .obter(codigo)
@@ -44,8 +44,8 @@ export default function useTributacaos() {
       });
   }
   return {
-    obterTodos,
-    obter,
+    obterTributacaoTodos,
+    obterTributacao,
     tributacoes,
     tributacao,
     setTributacao,

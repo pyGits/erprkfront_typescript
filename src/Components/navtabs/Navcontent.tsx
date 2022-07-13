@@ -1,6 +1,6 @@
 import React from "react";
 interface NavContentProps {
-  active: string;
+  active?: string;
   id: string;
   children: any;
 }

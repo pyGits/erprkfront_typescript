@@ -1,4 +1,4 @@
-import PrecosTab from "../../Pages/Product/Tabs/PrecosTab";
+import PrecosTab from "../../Pages/Produto/Tabs/PrecosTab";
 import Preco from "../Preco/Preco";
 
 export default class Produto {

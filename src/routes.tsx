@@ -1,7 +1,7 @@
 import React from "react";
 import { Routes, Route } from "react-router-dom";
-import ListProduct from "./Pages/Product/ListProduct";
-import FormProduct from "./Pages/Product/FormProduct";
+import ListProduct from "./Pages/Produto/ListarProduto";
+import FormProduct from "./Pages/Produto/FormProduto";
 // import Client from "./Pages/Client/Client";
 import NotFound from "./Pages/NotFound/NotFound";
 
